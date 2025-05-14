@@ -36,6 +36,25 @@ h1af1x=-np.exp(-x1**2)*2*x1
 h2f1=np.exp(-x2**2)
 h2f1x=first(h2f1)
 h2af1x=-np.exp(-x2**2)*2*x2
+#calculate convergence test
+C1=np.zeros(nx1+1)
+C2=np.zeros(nx1+1)
+for i in range(0,len(x1)):
+    C1[i]=np.abs(h1af1x[i]-h1f1x[i])/np.abs(h2af1x[i*2]-h2f1x[i*2])
+    C2[i]=(h1f1x[i]-h2f1x[2*i])/(h2f1x[2*i]-h3f1x[4*i])
+
+#plotting results
+fig,ax1 = plt.subplots(1, sharex=True, figsize=(10,6))
+ax1.plot(x1,C1,linewidth=4.0,label="$Q_1$")
+ax1.plot(x1,C2,linestyle='--',linewidth=4.0,label="$Q_2$")
+ax1.set_ylim([0,6.5])
+ax1.set_xlim([x1[0],x1[-1]])
+plt.xlabel("x",fontsize=20)
+ax1.legend(loc=2,fontsize=30,handlelength=3,frameon=False) 
+plt.xticks(fontsize= 18)
+plt.yticks(fontsize= 18)
+plt.savefig("QConvergencefirst.png",dpi=200)
+plt.show()
 
 
 h3f1=np.exp(-x3**2)
