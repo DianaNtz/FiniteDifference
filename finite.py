@@ -17,3 +17,13 @@ x2=np.linspace(0,1,nx2+1)
 nx3=nx2*2
 h3=1/(nx3-1)
 x3=np.linspace(0,1,nx3+1)
+#Finite Difference Derivatives first order
+def first(f):
+    n=len(f)
+    h=1/(n-1)
+    fx=np.zeros(n)
+    fx[0]=(f[1]-f[0])/h
+    fx[n-1]=(f[n-1]-f[n-2])/h
+    for i in range(1,n-1):
+        fx[i]=(f[i+1]-f[i-1])/(2*h)
+    return fx
